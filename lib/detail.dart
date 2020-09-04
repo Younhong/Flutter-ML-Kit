@@ -4,6 +4,8 @@ import 'dart:io';
 import 'dart:ui';
 import 'dart:async';
 
+import 'package:flutter_ml_kit/text.detector.painter.dart';
+
 class DetailScreen extends StatefulWidget {
   final String imagePath;
   DetailScreen(this.imagePath);
@@ -98,10 +100,13 @@ class _DetailScreenState extends State<DetailScreen> {
             child: Container(
               width: double.maxFinite,
               color: Colors.black,
-              child: AspectRatio(
-                aspectRatio: _imageSize.aspectRatio,
-                child: Image.file(
-                  File(path),
+              child: CustomPaint(
+                foregroundPainter: TextDetectorPainter(_imageSize, _elements),
+                child: AspectRatio(
+                  aspectRatio: _imageSize.aspectRatio,
+                  child: Image.file(
+                    File(path),
+                  ),
                 ),
               ),
             ),
